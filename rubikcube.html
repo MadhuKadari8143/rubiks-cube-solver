@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Rubik's Cube (Simulate + Solve)</h2>
+  <button onclick="scramble()">Scramble</button>
+  <button onclick="solve()">Solve</button>
+  <pre id="out"></pre>
+
+  <script>
+    const cube = { U: 'W', D: 'Y', F: 'G', B: 'B', L: 'O', R: 'R' };
+    let moves = [];
+
+    // Dummy cube state just tracks center colors for simplicity
+    function move(m) {
+      moves.push(m);
+      // Just log the move – real logic would change faces
+    }
+
+    function scramble() {
+      const possible = ['U', 'D', 'F', 'B', 'L', 'R'];
+      moves = [];
+      for (let i = 0; i < 10; i++) move(possible[Math.floor(Math.random() * 6)]);
+      show("Scrambled with: " + moves.join(" "));
+    }
+
+    function solve() {
+      const solution = [...moves].reverse().map(m => m + "'");
+      show("Solution: " + solution.join(" "));
+    }
+
+    function show(text) {
+      document.getElementById("out").innerText = text;
+    }
+
+    show("Click 'Scramble' to begin.");
+  </script>
+</body>
+</html>
